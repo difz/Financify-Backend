@@ -1,6 +1,7 @@
+```markdown
 # Backend API for Financify Application
 
-This is the backend for the *Financify Application, a financial management system that provides user authentication, transaction management, and cash flow analytics. The backend is built with **Node.js, **Express.js, and **MongoDB*.
+This is the backend for the *Financify Application*, a financial management system that provides user authentication, transaction management, and cash flow analytics. The backend is built with **Node.js**, **Express.js**, and **MongoDB**.
 
 ## Table of Contents
 - [Features](#features)
@@ -13,13 +14,13 @@ This is the backend for the *Financify Application, a financial management syste
 - [License](#license)
 
 ## Features
-- *User Authentication*:
+- **User Authentication**:
   - Register
   - Login with session-based authentication
-- *Transaction Management*:
+- **Transaction Management**:
   - Create, Read, Update, Delete (CRUD) transactions
   - Categorize transactions into income and expenses
-- *Cash Flow Analysis*:
+- **Cash Flow Analysis**:
   - Fetch and filter transactions by type, category, or date
   - Provide structured data for financial graphs
 
@@ -30,10 +31,70 @@ Ensure you have the following installed:
 
 ## Installation
 
-1. *Clone the repository*:
-   bash
-   git clone https://github.com/difz/Financify-Backend.git
-   cd your-repo-name
-2. **Install dependecies:**:
-    bash
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/difz/Financify-Backend.git
+    cd Financify-Backend
+    ```
+2. **Install dependencies**:
+    ```bash
     npm install
+    ```
+
+## Environment Variables
+Create a `.env` file in the root directory and add the following variables:
+
+```env
+PORT=3000
+MONGODB_URI=your_mongodb_connection_string
+SESSION_SECRET=your_session_secret
+```
+
+## Usage
+To start the server, run:
+
+```bash
+npm start
+```
+
+The backend API will be available at `http://localhost:3000`.
+
+## API Endpoints
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login a user
+- `POST /api/auth/logout` - Logout the current user
+
+### Transactions
+- `GET /api/transactions` - Get all transactions
+- `POST /api/transactions` - Create a new transaction
+- `GET /api/transactions/:id` - Get a transaction by ID
+- `PUT /api/transactions/:id` - Update a transaction by ID
+- `DELETE /api/transactions/:id` - Delete a transaction by ID
+
+### Analysis
+- `GET /api/analysis/cash-flow` - Get cash flow data
+
+## Project Structure
+```
+Financify-Backend/
+├── src/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   └── utils/
+├── .gitignore
+├── README.md
+├── package.json
+├── package-lock.json
+└── server.js
+```
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+```
+
+---
+
+**Note:** If there are specific sections or additional information you'd like to include or clarify, please let me know!
