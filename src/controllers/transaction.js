@@ -4,7 +4,8 @@ const {
     getTransactionByAccount,
     getTransactionByType,
     getTransactionByCategory,
-    // updateTransaction,
+    getTransactionById,
+    updateTransaction,
     deleteTransaction
 
 } = require('../models/transaction');
@@ -168,39 +169,81 @@ const createNewTransaction = async (req , res) => {
     }
 };
 
-// const updateTransaction = async (id, values) => {
-//     try {
-//         return await Transaction.findOneAndUpdate({ _id: id }, values, { new: true });
-//     } catch (error) {
-//         throw new error ('failed to update transaction: $(error.message)');
-//     }
-// };
+const updateTransactionById = async (req, res) => {
+    try {  
+        const { id } = req.params;
+        const updateField = req.body;
+        // const {
+        //     account,
+        //     type,
+        //     category,
+        //     amount,
+        //     date,
+        //     description
+        // } = req.body;
 
-const deleteSelectTransaction = async (id) => {
+        const existingTransaction = await getTransactionById({ _id: id});
+
+        if(!existingTransaction){
+            return res.status(404).json({
+                message: "Transaction not found",
+            });
+        }
+
+        const updatedTransaction = await updateTransaction(id, updateField);
+        // const updatedTransaction = await updateTransaction(id, {
+        //     account,
+        //     type,
+        //     category,
+        //     amount,
+        //     date,
+        //     description
+        // });
+
+        return res.status(200).json({
+            message: "Transaction updated successfully",
+            updatedTransaction,
+        });
+       
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+const deleteSelectTransaction = async (req, res) => {
     try {
-        const userId = req.user._id;
-        const {id} = req.params;
+     
+        const { id } = req.params;
+    
+        if(!id){
+            return res.status(400).json({
+                message: "Id is required to delete transaction!",
+            });
+        }
 
-    const existingTransaction = await getTransactionById({ userId, id });
-
-     if(!existingTransaction){
+        
+        const existingTransaction = await getTransactionById({ _id: id});
+        console.log(existingTransaction);
+        if(!existingTransaction){
          return res.status(404).json({
              message: "Transaction not found",
          });
-     }
+        }
 
-     const transaction = await deleteTransaction(id);
+     const transactions = await deleteTransaction(id);   
 
     
      if (transactions.length === 0) {
         return res.status(404).json({
-          message: `No transactions found for account: ${id}`,
+          message: `No transactions found for account: ${_id}`,
         });
       }
 
         return res.status(200).json({
             message: "Transaction deleted successfully",
-            transaction,
+            transactions,
         });   
     } catch (error) {
         return res.status(500).json({
@@ -215,7 +258,7 @@ module.exports = {
     getAllTransactionByType,
     getAllTransactionByCategory,
     createNewTransaction,
-    // updateTransaction,
+    updateTransactionById,
     deleteSelectTransaction
 };
 

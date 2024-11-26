@@ -36,7 +36,10 @@
 
     const getTransaction = (query) => {
         return TransactionModel.find(query);
-    }
+    };
+
+    const getTransactionById = (id) => 
+        TransactionModel.findById(id); 
 
     const getTransactionByAccount = (query) => {
         return TransactionModel.find(query);
@@ -56,11 +59,11 @@
     const deleteTransaction = (id) =>
         TransactionModel.findOneAndDelete({_id: id});
 
-    // const updateTransaction = (id, values) =>
-    //     TransactionModel.findByIdAndUpdate(id, values, {
-    //         new: true,
-    //         runValidators: true,
-    //     });
+    const updateTransaction = (id, values) =>
+        TransactionModel.findByIdAndUpdate(id, values, {
+            new: true,
+            runValidators: true,
+        });
 
     module.exports ={
         getTransaction,
@@ -70,6 +73,7 @@
         createTransaction,
         TransactionModel,
         deleteTransaction,
-        // updateTransaction,
+        getTransactionById,
+        updateTransaction,
         
     };
