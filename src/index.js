@@ -43,6 +43,8 @@ app.get("/", (req, res) => {
 app.use("/auth", require("./routes/authentication"));
 app.use("/account", require("./routes/account"));
 app.use("/transaction", require("./routes/transaction"));
+app.use('/category', require('./routes/category'));
+
 // app.use("/financialplan", require("./routes/financialplan"));
 
 //App listen
