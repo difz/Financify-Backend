@@ -1,6 +1,7 @@
   const { decodeSessionJwt } = require("../helpers/authentication");
   const { getUserBySessionToken } = require("../models/user");
 
+
   const ensureLogin = async (req, res, next) => {
     try {
       const decodedSession = decodeSessionJwt(req, res);

@@ -69,71 +69,75 @@ const registerUser = async (req, res) => {
     }
 };
 
-const loginUser = async (req,res) => {
+const loginUser = async (req, res) => {
     try {
-
-        const { email, password} = req.body;
-
-        if (!email || !password){
-            return res.status(400).json({
-                Message : "Please provide all the required fields",
-            });
-        }
-
-        const existingUser = await getUserByEmail(email).select(
-            "+authentication.password +authentication.salt",
-        );
-
-        console.log(existingUser);
-
-        if (!existingUser){
-            return res.status(400).json({
-                message : "User does not exist",
-            });
-        }
-
-        const expectedHash = hashToHex(password,existingUser.authentication.salt );
-        const isPassValid = expectedHash === existingUser.authentication.password;
-
-        if(!isPassValid){
-            return res.status(400).json({
-                message : "Invalid password",
-            });
-        }
-
-        const sessionSalt = randomBase64();
-        existingUser.authentication.sessionToken = hashToHex(
-            sessionSalt,
-            existingUser._id.toString(),
-        );
-
-        await existingUser.save();
-
-        if(!process.env.JWT_VERIFICATION_SECRET){
-            throw new Error("JWT_VERIFICATION_SECRET not found in .env file");
-        }
-
-        const sessionJwt = jwt.sign(
-            {sessionToken: existingUser.authentication.sessionToken},
-            process.env.JWT_VERIFICATION_SECRET,
-            { expiresIn: "1d"},
-        );
-
-        sendCookie(res, sessionJwt);
-
-        return res.status(200).json({
-            message : "Login successfully",
+      const { email, password } = req.body;
+  
+      if (!email || !password) {
+        return res.status(400).json({
+          message: "Please provide all the required fields",
         });
-    } catch (error){
-        console.log("Error", error);
-        return res.status(500).json({
-            message : "Something went wrong",
+      }
+  
+      const existingUser = await getUserByEmail(email).select(
+        "+authentication.password +authentication.salt"
+      );
+  
+      if (!existingUser) {
+        return res.status(400).json({
+          message: "User does not exist",
         });
+      }
+  
+      const expectedHash = hashToHex(password, existingUser.authentication.salt);
+      const isPassValid = expectedHash === existingUser.authentication.password;
+  
+      if (!isPassValid) {
+        return res.status(400).json({
+          message: "Invalid password",
+        });
+      }
+  
+      const sessionSalt = randomBase64();
+      existingUser.authentication.sessionToken = hashToHex(
+        sessionSalt,
+        existingUser._id.toString()
+      );
+  
+      await existingUser.save();
+  
+      if (!process.env.JWT_VERIFICATION_SECRET) {
+        throw new Error("JWT_VERIFICATION_SECRET not found in .env file");
+      }
+  
+      const sessionJwt = jwt.sign(
+        { sessionToken: existingUser.authentication.sessionToken },
+        process.env.JWT_VERIFICATION_SECRET,
+        { expiresIn: "1d" }
+      );
+  
+      // Set the session cookie
+      res.cookie('session', sessionJwt, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      });
+  
+      return res.status(200).json({
+        message: "Login successfully",
+      });
+    } catch (error) {
+      console.log("Error", error);
+      return res.status(500).json({
+        message: "Something went wrong",
+      });
     }
-};
+  };
+  
 
 const logoutUser = async (req,res) => {
-    res.clearCookie("PAW_20", {
+    res.clearCookie("session", {
         path: "/",
         httpOnly: true,
         sameSite: "none",
@@ -177,5 +181,4 @@ module.exports = {
     loginUser,
     logoutUser,
     getUserSession,
-    logoutUser,
 };

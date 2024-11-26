@@ -18,7 +18,10 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 // CORS
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', // Adjust to your frontend URL
+    credentials: true, // Allow credentials (cookies)
+  }));
 
 //MONGO DB CONNECTION
 if (!process.env.MONGO_URI) {

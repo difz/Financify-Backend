@@ -21,7 +21,7 @@ const randomBase64 = () => {
             throw new Error("JWT_VERIFICATION_SECRET not found in .env file");
         }
 
-        const sessionJwt = req.cookies["PAW_20"];
+        const sessionJwt = req.cookies["session"];
 
         if(!sessionJwt) {
             throw new Error("Cookie not found");
@@ -40,7 +40,7 @@ const randomBase64 = () => {
 };
 
 const sendCookie = (res, cookie) => {
-        res.cookie("PAW_20", cookie, {
+        res.cookie("session", cookie, {
             path: "/",
             maxAge: 24 * 60 * 60 * 1000, 
             httpOnly: true,
