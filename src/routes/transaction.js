@@ -4,7 +4,7 @@ const router = express.Router();
 
 const transactionController = require('../controllers/transaction');
 const auth = require('../middlewares/authentication');
-const { validateObjectId } = require('../middlewares/transaction');
+
 
 router.post('/create', auth.ensureLogin, transactionController.createNewTransaction);
 router.patch('/update/:id', auth.ensureLogin, transactionController.updateTransactionById);

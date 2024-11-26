@@ -13,7 +13,7 @@ const { use } = require('../routes/transaction');
 
 const getAllTransactions = async (req, res) => {
     try {
-        console.log(req.user._id);
+     
         const userId = req.user._id;
         
         const transactions = await getTransaction({ userId });
@@ -173,14 +173,7 @@ const updateTransactionById = async (req, res) => {
     try {  
         const { id } = req.params;
         const updateField = req.body;
-        // const {
-        //     account,
-        //     type,
-        //     category,
-        //     amount,
-        //     date,
-        //     description
-        // } = req.body;
+
 
         const existingTransaction = await getTransactionById({ _id: id});
 
@@ -191,14 +184,7 @@ const updateTransactionById = async (req, res) => {
         }
 
         const updatedTransaction = await updateTransaction(id, updateField);
-        // const updatedTransaction = await updateTransaction(id, {
-        //     account,
-        //     type,
-        //     category,
-        //     amount,
-        //     date,
-        //     description
-        // });
+
 
         return res.status(200).json({
             message: "Transaction updated successfully",
