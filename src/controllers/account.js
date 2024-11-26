@@ -180,6 +180,37 @@ const updateUserAccount = async (req, res) => {
     }
 };
 
+const transferAccount = async (req, res) => {
+    try{
+        const {from, to, amount} = req.body;
+        const fromAccount = await getAccountById(from);
+        const toAccount = await getAccountById(to);
+        if(!fromAccount || !toAccount){
+            return res.status(404).json({
+                message: 'Account not found',
+            });
+        }
+        if(fromAccount.amount < amount){
+            return res.status(400).json({
+                message: 'Insufficient funds',
+            });
+        }
+        const updatedFromAccount = await updateAccount(from, {amount: fromAccount.amount - amount});
+        const updatedToAccount = await updateAccount(to, {amount: toAccount.amount + amount});
+        return res.status(200).json({
+            message: 'Transfer successful',
+            fromAccount: updatedFromAccount,
+            toAccount: updatedToAccount,
+        });
+    }
+    catch(e){
+        return res.status(500).json({
+            message: error.message,
+        })
+    }
+    
+}
+
 module.exports = {
     createUserNewAccount,
     getAllAccounts,
@@ -187,4 +218,5 @@ module.exports = {
     getUserAccountByName,
     deleteUserAccount,
     updateUserAccount,
+    transferAccount,
 };

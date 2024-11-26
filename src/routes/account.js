@@ -11,6 +11,7 @@ router.get('/name/:accountName', auth.ensureLogin, accountController.getUserAcco
 router.patch('/update/:id', auth.ensureLogin, accountController.updateUserAccount);
 router.delete('/delete/:id', auth.ensureLogin, accountController.deleteUserAccount);
 router.get('/:id', auth.ensureLogin, accountController.getUserAccountById);
+router.patch('/transfer', auth.ensureLogin, accountController.transferAccount);
 
 module.exports = router;
 
