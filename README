@@ -1,1 +1,39 @@
-Backend Side of the App
+# Backend API for Financify Application
+
+This is the backend for the **Financify Application**, a financial management system that provides user authentication, transaction management, and cash flow analytics. The backend is built with **Node.js**, **Express.js**, and **MongoDB**.
+
+## Table of Contents
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Environment Variables](#environment-variables)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Project Structure](#project-structure)
+- [License](#license)
+
+## Features
+- **User Authentication**:
+  - Register
+  - Login with session-based authentication
+- **Transaction Management**:
+  - Create, Read, Update, Delete (CRUD) transactions
+  - Categorize transactions into income and expenses
+- **Cash Flow Analysis**:
+  - Fetch and filter transactions by type, category, or date
+  - Provide structured data for financial graphs
+
+## Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v16 or later)
+- [MongoDB](https://www.mongodb.com/)
+
+## Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/difz/Financify-Backend.git
+   cd your-repo-name
+2. **Install dependecies:**:
+    ```bash
+    npm install
