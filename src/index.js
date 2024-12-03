@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 
 // CORS
 app.use(cors({
-    origin: 'http://localhost:3000', // Adjust to your frontend URL
+    origin: '*', // Adjust to your frontend URL
     credentials: true, // Allow credentials (cookies)
   }));
 
