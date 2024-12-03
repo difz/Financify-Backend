@@ -13,11 +13,6 @@ const { use } = require('../routes/transaction');
 
 const getAllTransactions = async (req, res) => {
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-
     try {
      
         const userId = req.user._id;
@@ -37,11 +32,6 @@ const getAllTransactions = async (req, res) => {
 };
 
 const getAllTransactionByAccount = async (req, res) => {
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
 
     try {
 
@@ -78,11 +68,6 @@ const getAllTransactionByAccount = async (req, res) => {
 
 const getAllTransactionByType = async (req, res) => {
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-
     try {
         const userId = req.user._id;
         const {type} = req.params;
@@ -116,11 +101,6 @@ const getAllTransactionByType = async (req, res) => {
 
 const getAllTransactionByCategory = async (req, res) => {
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-
     try {
 
         const userId = req.user._id;
@@ -153,11 +133,6 @@ const getAllTransactionByCategory = async (req, res) => {
 };
 
 const createNewTransaction = async (req , res) => {
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
 
     try {
         const {
@@ -201,11 +176,6 @@ const createNewTransaction = async (req , res) => {
 
 const updateTransactionById = async (req, res) => {
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-
     try {  
         const { id } = req.params;
         const updateField = req.body;
@@ -235,11 +205,6 @@ const updateTransactionById = async (req, res) => {
 };
 
 const deleteSelectTransaction = async (req, res) => {
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
 
     try {
      
