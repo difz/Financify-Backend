@@ -9,6 +9,12 @@ const {
 const { getUserById } = require('../models/user');
 
 const createUserNewAccount = async (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try {
         const { accountName, amount } = req.body; // Extract account-specific data
         const userId = req.user._id; // Get userId from authenticated user
@@ -49,6 +55,12 @@ const createUserNewAccount = async (req, res) => {
 
 
 const getAllAccounts = async (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try {
         const userId = req.user._id;
         const accounts = await getAccount({ userId });
@@ -64,6 +76,12 @@ const getAllAccounts = async (req, res) => {
 };
 
 const getUserAccountById = async (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try {
         const { id } = req.params;
         const userId = req.user._id;
@@ -93,6 +111,12 @@ const getUserAccountById = async (req, res) => {
 };
 
 const getUserAccountByName = async (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try {
         const  accountName  = decodeURIComponent(req.params.accountName);
         const userId = req.user._id;
@@ -117,6 +141,12 @@ const getUserAccountByName = async (req, res) => {
 };
 
 const deleteUserAccount = async (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try {
         const { id } = req.params;
         const userId = req.user._id;
@@ -148,6 +178,12 @@ const deleteUserAccount = async (req, res) => {
 };
 
 const updateUserAccount = async (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try {
         const { id } = req.params;
         const userId = req.user._id;
@@ -181,6 +217,12 @@ const updateUserAccount = async (req, res) => {
 };
 
 const transferAccount = async (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try{
         const {from, to, amount} = req.body;
         const fromAccount = await getAccountById(from);

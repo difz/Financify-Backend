@@ -17,6 +17,14 @@ const jwt = require("jsonwebtoken");
 const { get } = require("mongoose");
 
 const registerUser = async (req, res) => {
+
+res.setHeader('Access-Control-Allow-Origin', '*');
+res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+  res.setHeader   
+
     try
     {
         const { username, email, password } = req.body;
@@ -70,6 +78,12 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try {
       const { email, password } = req.body;
   
@@ -137,6 +151,12 @@ const loginUser = async (req, res) => {
   
 
 const logoutUser = async (req,res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     res.clearCookie("session", {
         path: "/",
         httpOnly: true,
@@ -150,6 +170,12 @@ const logoutUser = async (req,res) => {
 };
 
 const getUserSession = async (req,res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
     try{
         const decodeToken = decodeSessionJwt(req, res);
 

@@ -1,6 +1,12 @@
 const { createCategory, getCategoriesByUser, deleteCategory } = require('../models/category');
 
 const createNewCategory = async (req, res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
   try {
     const { categoryName, categoryType } = req.body;
     const userId = req.user._id;
@@ -30,6 +36,12 @@ const createNewCategory = async (req, res) => {
 };
 
 const getUserCategories = async (req, res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
   try {
     const userId = req.user._id;
     const categories = await getCategoriesByUser(userId);
@@ -46,6 +58,12 @@ const getUserCategories = async (req, res) => {
 };
 
 const deleteUserCategory = async (req, res) => {
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+
   try {
     const { id } = req.params;
     const userId = req.user._id;
