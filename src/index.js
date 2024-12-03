@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 
 // CORS
 app.use(cors({
-    origin: '*', // Adjust to your frontend URL
+    origin: ["https://financify-gamma.vercel.app"], // Adjust to your frontend URL
     credentials: true, // Allow credentials (cookies)
   }));
 
@@ -44,8 +44,6 @@ app.use("/auth", require("./routes/authentication"));
 app.use("/account", require("./routes/account"));
 app.use("/transaction", require("./routes/transaction"));
 app.use('/category', require('./routes/category'));
-
-// app.use("/financialplan", require("./routes/financialplan"));
 
 //App listen
 app.listen(5000, () => {
