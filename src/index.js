@@ -19,7 +19,7 @@ app.use(morgan("dev"));
 
 // CORS
 app.use(cors({
-    origin: ["https://financify.my.id"], // Adjust to your frontend URL
+    origin: ["https://financify.web.id"], // Adjust to your frontend URL
     credentials: true, // Allow credentials (cookies)
   }));
 
